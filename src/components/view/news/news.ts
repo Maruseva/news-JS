@@ -2,7 +2,7 @@ import { DataNews } from '../sources/type';
 import './news.css';
 
 class News {
-    public draw(data: DataNews[] | []) {
+    public draw(data: DataNews[]): void {
         const news: DataNews[] = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
         const fragment = <DocumentFragment>document.createDocumentFragment();

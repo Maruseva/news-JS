@@ -23,7 +23,7 @@ class Loader {
         callback: (data: Data) => void = () => {
             console.error('No callback for GET response');
         }
-    ) {
+    ): void {
         this.load('GET', endpoint, callback, options);
     }
 
@@ -41,16 +41,14 @@ class Loader {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
-        if (Object.keys(urlOptions).length !== 0) {
-            Object.keys(urlOptions).forEach((key) => {
-                url += `${key}=${urlOptions[key]}&`;
-            });
-        }
+        Object.keys(urlOptions).forEach((key) => {
+            url += `${key}=${urlOptions[key as keyof Options]}&`;
+        });
 
         return url.slice(0, -1);
     }
 
-    private load(method: 'GET', endpoint: Endpoint, callback: (data: Data) => void, options = {}) {
+    private load(method: 'GET', endpoint: Endpoint, callback: (data: Data) => void, options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
