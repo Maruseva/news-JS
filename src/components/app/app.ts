@@ -3,8 +3,8 @@ import { AppView } from '../view/appView';
 import { Data } from '../view/sources/type';
 
 class App {
-    private controller: AppController;
-    private view: AppView;
+    private readonly controller: AppController;
+    private readonly view: AppView;
     constructor() {
         this.controller = new AppController();
         this.view = new AppView();
